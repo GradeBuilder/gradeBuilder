@@ -1,0 +1,151 @@
+/* General Styling */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+  color: white;
+  text-align: center;
+}
+
+/* Main Content Container */
+.content {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+}
+
+/* Form Page Styling */
+.form-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+  text-align: left;
+}
+
+/* Form Elements */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label Styling */
+label {
+  font-size: 1.2rem;
+  margin: 10px 0 5px;
+  text-align: left;
+  font-weight: bold;
+  color: #ffd700;
+}
+
+/* Input Fields Styling */
+select, input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  color: black;
+}
+
+/* Textarea Styling */
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+/* Dropdown Styling */
+select {
+  appearance: none;
+  background: white;
+  color: black;
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Focus Effect for Select */
+select:focus {
+  outline: none;
+  border-color: #ffd700;
+}
+
+/* Call-to-Action Button */
+.cta-button, #submitButton {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #ffd700;
+  color: #0f3460;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 20px;
+}
+
+/* Hover Effect for Button */
+.cta-button:hover, #submitButton:hover {
+  background: #ffcc00;
+  transform: scale(1.05);
+}
+
+/* Back Button Styling */
+.back-button {
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #ffd700;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Hover Effect for Back Button */
+.back-button:hover {
+  color: #ffcc00;
+}
+
+/* Results Section */
+#results {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+/* Results Heading Styling */
+#results h2 {
+  color: #ffd700;
+}
+
+/* Submission Message Styling */
+#submission {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ffd700;
+  margin-top: 20px;
+}
+
+/* Input Field Styling for Grades */
+input[type="number"] {
+  width: 48%;
+  margin-right: 4%;
+  display: inline-block;
+}
+
+/* Making sure all inputs fit well */
+input[type="text"], input[type="number"] {
+  width: 48%;
+  margin-bottom: 15px;
+  display: inline-block;
+}

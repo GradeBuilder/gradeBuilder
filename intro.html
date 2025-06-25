@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Discover Your Path</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset & base */
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f6fa;
+      color: #1e2a38;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Container & background */
+    .container {
+      flex-grow: 1;
+      background: url('https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1600&q=80') no-repeat center center / cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 100px 20px 60px;
+      position: relative;
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    /* Dark overlay */
+    .overlay {
+      background: rgba(10, 20, 38, 0.85);
+      border-radius: 16px;
+      max-width: 900px;
+      padding: 80px 40px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+      backdrop-filter: saturate(180%) blur(15px);
+      -webkit-backdrop-filter: saturate(180%) blur(15px);
+    }
+
+    /* Headings */
+    h1 {
+      font-size: clamp(2.8rem, 5vw, 3.6rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: 1.2px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+    }
+
+    .tagline {
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: #ffd700;
+      font-weight: 600;
+      margin-bottom: 42px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+      letter-spacing: 0.05em;
+    }
+
+    /* University rotator */
+    .university-rotator {
+      position: relative;
+      height: 42px;
+      margin-bottom: 40px;
+      overflow: hidden;
+      font-weight: 700;
+      font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+      letter-spacing: 0.05em;
+    }
+
+    .university-name {
+      position: absolute;
+      width: 100%;
+      opacity: 0;
+      animation: fadeSlide 12s infinite;
+      padding: 0 10px;
+      line-height: 42px;
+      will-change: transform, opacity;
+    }
+    .university-name:nth-child(2) { animation-delay: 3s; }
+    .university-name:nth-child(3) { animation-delay: 6s; }
+    .university-name:nth-child(4) { animation-delay: 9s; }
+
+    @keyframes fadeSlide {
+      0%   { opacity: 0; transform: translateY(20px); }
+      5%   { opacity: 1; transform: translateY(0); }
+      25%  { opacity: 1; }
+      30%  { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 0; }
+    }
+
+    /* Paragraph */
+    .overlay p {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      color: #ddd;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      line-height: 1.7;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    }
+
+    /* Button */
+    .btn {
+      display: inline-block;
+      padding: 16px 44px;
+      font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+      font-weight: 700;
+      color: #1e2a38;
+      background: linear-gradient(135deg, #ffd700 0%, #f7c400 100%);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.45);
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+
+    .btn:hover,
+    .btn:focus {
+      background: linear-gradient(135deg, #f7c400 0%, #e6b600 100%);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(230, 182, 0, 0.7);
+      outline: none;
+    }
+
+    /* Mission Section */
+    .mission {
+      background-color: #ffffff;
+      color: #1e2a38;
+      padding: 80px 20px 100px;
+      text-align: center;
+      box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.05);
+    }
+
+    .mission-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .mission h2 {
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: 0.03em;
+      color: #111a2a;
+    }
+
+    .mission-content {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      margin-top: 48px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .mission img {
+      max-width: 420px;
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+    .mission img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .mission p {
+      font-size: clamp(1rem, 1.4vw, 1.18rem);
+      max-width: 520px;
+      color: #4b5868;
+      line-height: 1.85;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-align: left;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .mission-content {
+        gap: 32px;
+      }
+      .mission p {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 80px 15px 40px;
+      }
+      .overlay {
+        padding: 60px 30px;
+      }
+      h1 {
+        font-size: 2.4rem;
+      }
+      .tagline {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+      }
+      .btn {
+        padding: 14px 36px;
+        font-size: 1.1rem;
+      }
+      .mission h2 {
+        font-size: 2rem;
+      }
+      .mission-content {
+        flex-direction: column;
+      }
+      .mission img {
+        max-width: 90vw;
+      }
+      .mission p {
+        max-width: 100%;
+        font-size: 1.05rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .tagline {
+        font-size: 1rem;
+      }
+      .btn {
+        padding: 12px 28px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" role="main" aria-label="Discover your path hero section">
+    <div class="overlay">
+      <h1>Discover Your Path</h1>
+      <div class="tagline" aria-live="polite">Empowering your academic journey, one step at a time</div>
+
+      <div class="university-rotator" aria-live="polite" aria-atomic="true" aria-relevant="text">
+        <div class="university-name">University of Toronto</div>
+        <div class="university-name">McGill University</div>
+        <div class="university-name">UBC – University of British Columbia</div>
+        <div class="university-name">Western University</div>
+      </div>
+
+      <p>Explore personalized post-secondary programs that match your grades, goals, and interests. Let’s help you take the next confident step.</p>
+      <a href="pagePicker.html" class="btn" role="button" aria-label="Get Started with Discover Your Path">Get Started</a>
+    </div>
+  </div>
+
+  <section class="mission" aria-labelledby="mission-title">
+    <div class="mission-inner">
+      <h2 id="mission-title">Our Mission</h2>
+      <div class="mission-content">
+        <img src="https://media.istockphoto.com/id/588353994/photo/corporate-communication-concept-our-mission.jpg?s=612x612&w=0&k=20&c=zLwVdfBMny5lip1RKBrrwDZ_RuAn1P8Q7gfnp65_aqs=" alt="Students planning academic path" />
+        <p>We’re dedicated to helping students and institutions navigate the path to higher education with clarity and confidence. Whether you're exploring programs, building academic profiles, or preparing for the future, our platform is your trusted guide to informed decisions.</p>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
