@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>My Calendar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     * {
       margin: 0;
@@ -17,17 +18,58 @@
       color: #f5f1e9;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
       min-height: 100vh;
-      padding: 60px 20px;
+    }
+
+    /* NAV BAR */
+    nav {
+      background: #1e2a38;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav .logo {
+      color: #ffd700;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-decoration: none;
+      letter-spacing: 1.1px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 6px 8px;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a:focus {
+      background: #ffd700;
+      color: #1e2a38;
+      outline: none;
     }
 
     h1 {
       font-size: 2.8rem;
       color: #ffd700;
       font-weight: 900;
-      margin-bottom: 40px;
+      margin: 40px 0 20px;
       text-align: center;
       letter-spacing: 1px;
       text-shadow: 0 0 6px rgba(255, 215, 0, 0.3);
@@ -42,7 +84,7 @@
       box-shadow: 0 10px 28px rgba(255, 215, 0, 0.15);
       overflow: hidden;
       border: 2px solid #ffd700;
-      margin-bottom: 50px;
+      margin: 0 auto 50px;
     }
 
     iframe {
@@ -55,6 +97,7 @@
 
     .back-button {
       display: inline-block;
+      margin: 0 auto 40px;
       padding: 16px 40px;
       background-color: #ffd700;
       color: #1c1c1c;
@@ -64,6 +107,7 @@
       text-decoration: none;
       transition: background-color 0.3s ease, transform 0.2s ease;
       box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+      text-align: center;
     }
 
     .back-button:hover {
@@ -74,6 +118,7 @@
     @media (max-width: 768px) {
       h1 {
         font-size: 2rem;
+        margin-top: 30px;
       }
 
       iframe {
@@ -84,10 +129,26 @@
         padding: 14px 30px;
         font-size: 1rem;
       }
+
+      nav ul {
+        flex-wrap: wrap;
+        gap: 18px;
+      }
     }
   </style>
 </head>
 <body>
+
+  <nav role="navigation" aria-label="Main navigation">
+    <a href="#" class="logo">Discover Your Path</a>
+    <ul>
+      <li><a href="intro.html" tabindex="0">Home</a></li>
+      <li><a href="career explore.html" tabindex="0">Career Explorer</a></li>
+      <li><a href="pagePicker.html" tabindex="0">Get Started</a></li>
+      <li><a href="contact.html" tabindex="0">Contact</a></li>
+      <li><a href="highSchoolPlan.html">Planner</a></li>
+    </ul>
+  </nav>
 
   <h1>Calendar</h1>
 

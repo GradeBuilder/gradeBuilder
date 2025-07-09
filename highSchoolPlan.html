@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Career Path Flowchart</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #121212;
+      color: #f5f1e9;
+      min-height: 100vh;
+    }
+
+    nav {
+      background: #1e2a38;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav .logo {
+      color: #ffd700;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-decoration: none;
+      letter-spacing: 1.1px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+    nav ul li a {
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 6px 8px;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+    nav ul li a:hover,
+    nav ul li a:focus {
+      background: #ffd700;
+      color: #1e2a38;
+      outline: none;
+    }
+
+    header {
+      background-color: #1c1c1c;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #ffd700;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #ffd700;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    select {
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      margin: 20px 0;
+      border: none;
+      outline: none;
+      background-color: #ffd700;
+      color: #1c1c1c;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .flowchart {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin-top: 30px;
+      align-items: center;
+    }
+    .step {
+      background-color: #1c1c1c;
+      border: 2px solid #ffd700;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 0 12px #ffd700a0;
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+    }
+    .step::after {
+      content: "\2193";
+      font-size: 2rem;
+      color: #ffd700;
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .step:last-child::after {
+      display: none;
+    }
+    .step h2 {
+      color: #ffd700;
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+    .step ul {
+      text-align: left;
+      padding-left: 20px;
+    }
+    .step ul li {
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 720px) {
+      nav ul {
+        flex-wrap: wrap;
+        gap: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav role="navigation" aria-label="Main navigation">
+    <a href="#" class="logo">Discover Your Path</a>
+    <ul>
+      <li><a href="intro.html" tabindex="0">Home</a></li>
+      <li><a href="career explore.html" tabindex="0">Career Explorer</a></li>
+      <li><a href="pagePicker.html" tabindex="0">Get Started</a></li>
+      <li><a href="contact.html" tabindex="0">Contact</a></li>
+      <li><a href="highSchoolPlan.html">Planner</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>Explore Your Career Flowchart</h1>
+  </header>
+
+  <main class="container">
+    <select id="careerSelect" onchange="loadFlowchart()">
+      <option value="">-- Choose a Career --</option>
+      <option value="doctor">Doctor / Pre-Med</option>
+      <option value="engineer">Engineer</option>
+    </select>
+
+    <div class="flowchart" id="flowchartOutput"></div>
+  </main>
+
+  <script>
+    const plans = {
+      doctor: [
+    { grade: "Grade 9", items: ["Science, Math, English, Geography, French", "Join science or health clubs", "Start volunteering at hospitals if possible"] },
+    { grade: "Grade 10", items: ["Science, Math, Careers/Civics", "Plan community service hours with medical exposure", "Keep GPA high"] },
+    { grade: "Grade 11", items: ["Biology, Chemistry, Functions", "Join HOSA or similar club", "Research universities offering Life Sciences"] },
+    { grade: "Grade 12", items: ["Biology, Chemistry, Advanced Functions, English", "Apply to Life Sci programs", "Get reference letters"] }
+  ],
+  engineer: [
+    { grade: "Grade 9", items: ["Math, Science, English, Tech electives", "Join robotics or coding club"] },
+    { grade: "Grade 10", items: ["Science, Math, Computer electives", "Participate in STEM competitions"] },
+    { grade: "Grade 11", items: ["Physics, Functions, Chemistry, Computer Science", "Research engineering programs"] },
+    { grade: "Grade 12", items: ["Calculus, Physics, Chemistry, Advanced Functions", "Apply to Eng programs"] }
+  ],
+  lawyer: [
+    { grade: "Grade 9", items: ["English, History, Geography", "Join debate or student council"] },
+    { grade: "Grade 10", items: ["Careers/Civics, History", "Volunteer for social justice groups"] },
+    { grade: "Grade 11", items: ["Law, English, History", "Participate in Model UN or mock trials"] },
+    { grade: "Grade 12", items: ["English, Law, Social Science electives", "Apply to pre-law/political science programs"] }
+  ],
+  business: [
+    { grade: "Grade 9", items: ["Math, English, Geography", "Join DECA or school business club"] },
+    { grade: "Grade 10", items: ["Introduction to Business, Careers/Civics", "Start a small business or project"] },
+    { grade: "Grade 11", items: ["Accounting, Marketing, Functions", "Continue with DECA, attend competitions"] },
+    { grade: "Grade 12", items: ["Business Leadership, Calculus, English", "Apply to business programs (e.g., BBA/BComm)"] }
+  ],
+  cs: [
+    { grade: "Grade 9", items: ["Math, Science, English, Computer Studies if offered", "Join coding or robotics club"] },
+    { grade: "Grade 10", items: ["Intro to Programming, Math", "Start building simple projects (apps/websites)"] },
+    { grade: "Grade 11", items: ["Computer Science, Functions, Physics", "Compete in hackathons or contests"] },
+    { grade: "Grade 12", items: ["Computer Science, Advanced Functions, Calculus", "Apply to CS/Software Eng programs"] }
+  ],
+  arts: [
+    { grade: "Grade 9", items: ["Visual Arts, Drama, Music", "Join art club or theatre group"] },
+    { grade: "Grade 10", items: ["Arts electives, Media Studies", "Build portfolio pieces"] },
+    { grade: "Grade 11", items: ["Visual Arts, Photography, Music, Drama", "Attend workshops or art shows"] },
+    { grade: "Grade 12", items: ["Studio Arts, Media Arts", "Apply to arts/media programs, submit portfolio"] }
+  ],
+  trades: [
+    { grade: "Grade 9", items: ["Tech Ed, Math, Science", "Explore woodworking or auto repair if available"] },
+    { grade: "Grade 10", items: ["Careers/Civics, Tech Ed", "Look into co-op options for hands-on learning"] },
+    { grade: "Grade 11", items: ["Construction, Manufacturing, Co-op", "Research apprenticeships"] },
+    { grade: "Grade 12", items: ["Tech Ed, Co-op, Workplace Math", "Apply to college trades/apprenticeship programs"] }
+  ],
+  teacher: [
+    { grade: "Grade 9", items: ["English, Math, Geography", "Help tutor peers or volunteer with kids"] },
+    { grade: "Grade 10", items: ["Careers/Civics, History", "Join mentorship or peer tutoring programs"] },
+    { grade: "Grade 11", items: ["English, Social Sciences, Biology", "Volunteer in classrooms or camps"] },
+    { grade: "Grade 12", items: ["English, Child Development, Functions", "Apply to education/arts programs"] }
+  ],
+  environment: [
+    { grade: "Grade 9", items: ["Science, Geography", "Join eco-club or environmental club"] },
+    { grade: "Grade 10", items: ["Careers/Civics, Science", "Volunteer with environmental organizations"] },
+    { grade: "Grade 11", items: ["Biology, Chemistry, Environmental Science", "Participate in green initiatives"] },
+    { grade: "Grade 12", items: ["Advanced Functions, Biology, Earth Science", "Apply to environmental programs"] }
+  ],
+  psychology: [
+    { grade: "Grade 9", items: ["English, Science, Math", "Read psychology articles or join health club"] },
+    { grade: "Grade 10", items: ["Careers/Civics, Science", "Volunteer in community wellness programs"] },
+    { grade: "Grade 11", items: ["Biology, Intro to Anthro/Psych/Soc", "Join peer mentorship initiatives"] },
+    { grade: "Grade 12", items: ["Psychology, Biology, English", "Apply to psychology or social science programs"] }
+  ]
+    };
+
+    function loadFlowchart() {
+      const selected = document.getElementById('careerSelect').value;
+      const container = document.getElementById('flowchartOutput');
+      container.innerHTML = '';
+
+      if (!plans[selected]) return;
+
+      plans[selected].forEach((year) => {
+        const step = document.createElement('div');
+        step.className = 'step';
+        const title = `<h2>${year.grade}</h2>`;
+        const list = '<ul>' + year.items.map(item => `<li>${item}</li>`).join('') + '</ul>';
+        step.innerHTML = title + list;
+        container.appendChild(step);
+      });
+    }
+  </script>
+
+</body>
+</html>

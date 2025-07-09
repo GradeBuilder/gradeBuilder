@@ -22,6 +22,46 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
+    /* NAV BAR */
+    nav {
+      background: #1e2a38;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav .logo {
+      color: #ffd700;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-decoration: none;
+      letter-spacing: 1.1px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
+    }
+    nav ul li a {
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 6px 8px;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+    nav ul li a:hover,
+    nav ul li a:focus {
+      background: #ffd700;
+      color: #1e2a38;
+      outline: none;
+    }
+
     /* Container & background */
     .container {
       flex-grow: 1;
@@ -36,7 +76,6 @@
       overflow: hidden;
     }
 
-    /* Dark overlay */
     .overlay {
       background: rgba(10, 20, 38, 0.85);
       border-radius: 16px;
@@ -47,7 +86,6 @@
       -webkit-backdrop-filter: saturate(180%) blur(15px);
     }
 
-    /* Headings */
     h1 {
       font-size: clamp(2.8rem, 5vw, 3.6rem);
       font-weight: 700;
@@ -65,7 +103,6 @@
       letter-spacing: 0.05em;
     }
 
-    /* University rotator */
     .university-rotator {
       position: relative;
       height: 42px;
@@ -99,7 +136,6 @@
       100% { opacity: 0; }
     }
 
-    /* Paragraph */
     .overlay p {
       font-size: clamp(1rem, 1.5vw, 1.15rem);
       max-width: 700px;
@@ -111,7 +147,17 @@
       text-shadow: 0 1px 3px rgba(0,0,0,0.5);
     }
 
-    /* Button */
+    .summary-list {
+      list-style: disc inside;
+      max-width: 700px;
+      margin: 0 auto 32px;
+      text-align: left;
+      color: #ffd700;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    }
+
     .btn {
       display: inline-block;
       padding: 16px 44px;
@@ -136,7 +182,6 @@
       outline: none;
     }
 
-    /* Mission Section */
     .mission {
       background-color: #ffffff;
       color: #1e2a38;
@@ -191,7 +236,46 @@
       text-align: left;
     }
 
-    /* Responsive */
+    .site-overview {
+      background-color: #f9fafc;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .site-overview h2 {
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      font-weight: 700;
+      color: #1e2a38;
+      margin-bottom: 20px;
+    }
+
+    .site-overview p {
+      font-size: clamp(1rem, 1.4vw, 1.15rem);
+      color: #4b5868;
+      max-width: 800px;
+      margin: 0 auto 50px;
+      line-height: 1.8;
+    }
+
+    .site-overview .feature-box {
+      flex: 1 1 300px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      padding: 28px;
+    }
+
+    .site-overview .feature-box h3 {
+      color: #1e2a38;
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+
+    .site-overview .feature-box p {
+      color: #444;
+      line-height: 1.6;
+    }
+
     @media (max-width: 900px) {
       .mission-content {
         gap: 32px;
@@ -208,54 +292,31 @@
       .overlay {
         padding: 60px 30px;
       }
-      h1 {
-        font-size: 2.4rem;
-      }
-      .tagline {
-        font-size: 1.1rem;
-        margin-bottom: 30px;
-      }
-      .btn {
-        padding: 14px 36px;
-        font-size: 1.1rem;
-      }
-      .mission h2 {
-        font-size: 2rem;
-      }
       .mission-content {
         flex-direction: column;
-      }
-      .mission img {
-        max-width: 90vw;
-      }
-      .mission p {
-        max-width: 100%;
-        font-size: 1.05rem;
-      }
-    }
-
-    @media (max-width: 400px) {
-      h1 {
-        font-size: 2rem;
-      }
-      .tagline {
-        font-size: 1rem;
-      }
-      .btn {
-        padding: 12px 28px;
-        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="container" role="main" aria-label="Discover your path hero section">
+  <nav role="navigation" aria-label="Main navigation">
+    <a href="#" class="logo">Discover Your Path</a>
+    <ul>
+      <li><a href="intro.html" tabindex="0">Home</a></li>
+      <li><a href="career explore.html" tabindex="0">Career Explorer</a></li>
+      <li><a href="pagePicker.html" tabindex="0">Get Started</a></li>
+      <li><a href="contact.html" tabindex="0">Contact</a></li>
+      <li><a href="highSchoolPlan.html">Planner</a></li>
+    </ul>
+  </nav>
+
+  <div class="container" role="main">
     <div class="overlay">
       <h1>Discover Your Path</h1>
-      <div class="tagline" aria-live="polite">Empowering your academic journey, one step at a time</div>
+      <div class="tagline">Empowering your academic journey, one step at a time</div>
 
-      <div class="university-rotator" aria-live="polite" aria-atomic="true" aria-relevant="text">
+      <div class="university-rotator">
         <div class="university-name">University of Toronto</div>
         <div class="university-name">McGill University</div>
         <div class="university-name">UBC – University of British Columbia</div>
@@ -263,7 +324,15 @@
       </div>
 
       <p>Explore personalized post-secondary programs that match your grades, goals, and interests. Let’s help you take the next confident step.</p>
-      <a href="pagePicker.html" class="btn" role="button" aria-label="Get Started with Discover Your Path">Get Started</a>
+
+      <ul class="summary-list">
+        <li>Find post-secondary programs tailored to your grades and interests</li>
+        <li>Plan your academic path with easy-to-use tools</li>
+        <li>Track scholarships and application deadlines</li>
+        <li>Explore career options based on your profile</li>
+      </ul>
+
+      <a href="pagePicker.html" class="btn">Get Started</a>
     </div>
   </div>
 
@@ -273,6 +342,40 @@
       <div class="mission-content">
         <img src="https://media.istockphoto.com/id/588353994/photo/corporate-communication-concept-our-mission.jpg?s=612x612&w=0&k=20&c=zLwVdfBMny5lip1RKBrrwDZ_RuAn1P8Q7gfnp65_aqs=" alt="Students planning academic path" />
         <p>We’re dedicated to helping students and institutions navigate the path to higher education with clarity and confidence. Whether you're exploring programs, building academic profiles, or preparing for the future, our platform is your trusted guide to informed decisions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="site-overview" aria-labelledby="overview-title">
+    <div>
+      <h2 id="overview-title">What You’ll Find Inside</h2>
+      <p>"Discover Your Path" is your all-in-one academic and career planning companion. Here’s a complete breakdown of everything you can explore within the site:</p>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: center;">
+        <div class="feature-box">
+          <h3>🎯 Program Matcher</h3>
+          <p>Enter your academic data to instantly discover eligible university and college programs tailored to you.</p>
+        </div>
+        <div class="feature-box">
+          <h3>📅 High School Planner</h3>
+          <p>View multi-year academic plans by career path, with recommended courses and extracurriculars per grade.</p>
+        </div>
+        <div class="feature-box">
+          <h3>🔍 Career Explorer</h3>
+          <p>Explore detailed job profiles, skills, and matching post-secondary pathways based on your goals.</p>
+        </div>
+        <div class="feature-box">
+          <h3>🎓 University Profiles</h3>
+          <p>Browse university admission info, program highlights, and application strategies by institution.</p>
+        </div>
+        <div class="feature-box">
+          <h3>💸 Scholarship Tracker</h3>
+          <p>Stay ahead of scholarships that match your profile, with due dates and eligibility tips.</p>
+        </div>
+        <div class="feature-box">
+          <h3>📬 Contact & Support</h3>
+          <p>Get help or send feedback through our easy-to-use contact form or on webflare12@gmail.com.</p>
+        </div>
       </div>
     </div>
   </section>
