@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GradeBuilder — Grade Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* === theme + base === */
+    :root{
+      --bg:#121212;
+      --panel:#1c1c1c;
+      --muted:#e5d8b0;
+      --gold:#ffd700;
+      --gold-2:#ffea64;
+      --panel-2:#222;
+      --text:#f5f1e9;
+    }
+    *{box-sizing:border-box}
+    body {
+      margin:0;
+      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* === NAVBAR / LOGO === */
+    .navbar {
+      display:flex;
+      align-items:center;
+      gap:16px;
+      padding:14px 22px;
+      background:linear-gradient(180deg, #121212 0%, #161616 100%);
+      border-bottom:2px solid rgba(255,215,0,0.06);
+      position:sticky;
+      top:0;
+      z-index:40;
+    }
+    .logo-link{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:var(--gold);
+    }
+    .logo-mark{
+      width:38px;
+      height:38px;
+      display:inline-grid;
+      place-items:center;
+      background:linear-gradient(180deg,var(--gold),var(--gold-2));
+      border-radius:8px;
+      box-shadow:0 6px 18px rgba(255,215,0,0.08);
+    }
+    .logo-mark svg{width:20px;height:20px;fill:#111}
+    .logo-text{font-weight:800; letter-spacing:0.6px;}
+    .nav-spacer{flex:1}
+
+    /* === MAIN CARD === */
+    .container {
+      max-width:1000px;
+      margin:34px auto;
+      padding:28px;
+      background:var(--panel);
+      border-radius:14px;
+      border:2px solid var(--gold);
+      box-shadow:0 10px 40px rgba(0,0,0,0.6), 0 0 40px rgba(255,215,0,0.03) inset;
+    }
+
+    h1{color:var(--gold); margin:2px 0 8px; font-size:2.1rem}
+    p.lead{color:var(--muted); margin:0 0 22px}
+
+    /* === Grade Tabs === */
+    .tabs {
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      margin-bottom:20px;
+      flex-wrap:wrap;
+    }
+    .tabs button {
+      background:var(--panel-2);
+      color:var(--gold);
+      border:2px solid rgba(255,215,0,0.06);
+      padding:10px 18px;
+      border-radius:28px;
+      cursor:pointer;
+      font-weight:700;
+      transition:all .18s ease;
+    }
+    .tabs button:hover{ transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,0.6) }
+    .tabs button.active{
+      background:linear-gradient(180deg,var(--gold),var(--gold-2));
+      color:#111;
+      box-shadow:0 6px 18px rgba(255,215,0,0.12);
+      border-color:transparent;
+    }
+
+    /* === controls === */
+    .row {display:flex; gap:12px; align-items:center}
+    .col {flex:1}
+    label{display:block; color:var(--gold); font-weight:700; margin-bottom:8px; font-size:.95rem}
+
+    select, input[type="text"], input[type="number"], input[type="date"]{
+      width:100%;
+      padding:12px 12px;
+      border-radius:10px;
+      border:1px solid rgba(255,215,0,0.12);
+      background:var(--panel-2);
+      color:var(--text);
+      font-size:1rem;
+    }
+
+    /* === table === */
+    .card {
+      margin-top:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03));
+      border-radius:12px;
+      overflow:hidden;
+      border:1px solid rgba(255,215,0,0.04);
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      color:var(--text);
+    }
+    thead th{
+      text-align:left;
+      padding:12px 14px;
+      background:var(--gold);
+      color:#111;
+      font-size:.88rem;
+      text-transform:uppercase;
+      letter-spacing: .6px;
+    }
+    tbody tr{ border-bottom:1px solid rgba(255,255,255,0.03) }
+    tbody td{ padding:12px 14px; vertical-align:middle }
+    .cell-input{ width:100%; padding:8px 10px; border-radius:8px; border:1px solid rgba(0,0,0,0.3); background:transparent; color:var(--text) }
+
+    .icon-btn{
+      display:inline-grid; place-items:center;
+      padding:8px 10px; border-radius:8px; border:none; cursor:pointer;
+    }
+    .del-btn{ background:#9b1f1f; color:#fff }
+    .add-btn{ background:var(--gold); color:#111; font-weight:800; border-radius:12px; padding:10px 16px; border:none; cursor:pointer }
+
+    /* === predicted card === */
+    .predicted {
+      margin-top:20px;
+      border-radius:12px;
+      padding:18px;
+      border:1px solid rgba(255,215,0,0.06);
+      background:linear-gradient(180deg, rgba(255,215,0,0.02), rgba(0,0,0,0.03));
+      text-align:center;
+    }
+    .predicted h3{ margin:0; color:var(--gold) }
+    .predicted strong{ color:#fff; font-size:1.25rem }
+
+    /* === actions === */
+    .actions { display:flex; gap:12px; justify-content:center; margin-top:22px }
+    .btn { background:var(--gold); color:#111; padding:12px 22px; border-radius:30px; border:none; font-weight:800; cursor:pointer }
+    .btn:hover{ background:var(--gold-2) }
+
+    /* === planner summary (page 2) === */
+    #plannerView{ display:none }
+    .plan-grade {
+      background:var(--panel-2);
+      border:1px solid rgba(255,215,0,0.04);
+      border-radius:12px;
+      padding:14px;
+      margin-bottom:12px;
+    }
+    .plan-header{ display:flex; justify-content:space-between; gap:12px; align-items:center }
+    .small { color:var(--muted); font-size:.95rem }
+    .muted { color:var(--muted) }
+
+    /* responsive */
+    @media (max-width:720px){
+      .row{flex-direction:column}
+      .tabs{gap:8px}
+      .container{ margin:20px 16px; padding:20px }
+      h1{ font-size:1.6rem }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <a class="logo-link" href="index.html" title="Back to Home">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6a1 1 0 0 1 1-1h12a3 3 0 0 1 3 3v10a1 1 0 0 1-1 1H6a3 3 0 0 1-3-3V6z"/></svg>
+      </span>
+      <span class="logo-text">GradeBuilder</span>
+    </a>
+    <div class="nav-spacer"></div>
+  </nav>
+
+  <!-- MAIN (page 1) -->
+  <main id="mainView" class="container" role="main">
+    <h1>📊 Grade Tracker</h1>
+    <p class="lead">Track assessments per grade & subject — add tests, mocks, coursework and get a live predicted grade.</p>
+
+    <!-- grade tabs -->
+    <div class="tabs" role="tablist" aria-label="Grades">
+      <button onclick="switchYear(9, this)" class="active" aria-selected="true">Grade 9</button>
+      <button onclick="switchYear(10, this)">Grade 10</button>
+      <button onclick="switchYear(11, this)">Grade 11</button>
+      <button onclick="switchYear(12, this)">Grade 12</button>
+    </div>
+
+    <!-- subject + target -->
+    <div class="row" style="margin-top:6px">
+      <div class="col" style="min-width:180px">
+        <label for="subject">Subject</label>
+        <select id="subject" aria-label="Subject">
+          <option>Maths</option>
+          <option>English</option>
+          <option>Biology</option>
+          <option>Chemistry</option>
+          <option>Physics</option>
+          <option>History</option>
+          <option>Computer Science</option>
+          <option>Economics</option>
+        </select>
+      </div>
+
+      <div style="width:180px">
+        <label for="target">Target Grade</label>
+        <select id="target" aria-label="Target Grade">
+          <option>A*</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- assessments table -->
+    <div class="card" aria-live="polite" style="margin-top:14px">
+      <table id="assessmentTable" role="table" aria-label="Assessments">
+        <thead>
+          <tr>
+            <th style="width:28%">Type</th>
+            <th style="width:48%">Topic / Notes</th>
+            <th style="width:14%">Score (%)</th>
+            <th style="width:10%">Remove</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div style="display:flex; justify-content:center; gap:12px; margin-top:12px">
+      <button class="add-btn" onclick="addAssessment()">+ Add Assessment</button>
+    </div>
+
+    <div class="predicted" aria-live="polite" style="margin-top:18px">
+      <h3>🎯 Predicted Grade: <strong id="predicted">-</strong></h3>
+      <div class="small muted" id="avgDisplay">Average: —</div>
+    </div>
+
+    <div class="actions" style="margin-top:18px">
+      <button class="btn" onclick="saveAndContinue()">Save & Continue</button>
+      <button class="btn" onclick="downloadPlan()" title="Download JSON">Export</button>
+    </div>
+  </main>
+
+  <!-- PLANNER / SUMMARY (page 2) -->
+  <section id="plannerView" class="container" aria-hidden="true">
+    <h1 style="margin-bottom:6px">🗂️ Saved Plan</h1>
+    <p class="lead">Here's a summary of the subjects and assessments you've saved. Click "Edit Plan" to go back and change anything.</p>
+
+    <div id="summaryContainer" style="margin-top:12px"></div>
+
+    <div style="display:flex; gap:12px; justify-content:center; margin-top:18px">
+      <button class="btn" onclick="editPlan()">✏️ Edit Plan</button>
+      <button class="btn" onclick="clearAll()">🗑️ Clear All</button>
+    </div>
+  </section>
+
+  <script>
+    /***********************
+     * Data model and init *
+     ***********************/
+    const state = {
+      currentYear: 9,
+      grades: {
+        9: { subject:'Maths', target:'A*', assessments:[] },
+        10:{ subject:'Maths', target:'A*', assessments:[] },
+        11:{ subject:'Maths', target:'A*', assessments:[] },
+        12:{ subject:'Maths', target:'A*', assessments:[] },
+      }
+    };
+
+    // Load from localStorage if exists
+    function loadFromStorage(){
+      try{
+        const raw = localStorage.getItem('gradeBuilderData');
+        if(raw){
+          const parsed = JSON.parse(raw);
+          if(parsed && parsed.grades) {
+            state.grades = parsed.grades;
+          }
+        }
+      }catch(e){ console.warn("couldn't load saved data",e) }
+    }
+
+    function saveToStorage(){
+      const payload = { grades: state.grades, savedAt: new Date().toISOString() };
+      localStorage.setItem('gradeBuilderData', JSON.stringify(payload));
+    }
+
+    loadFromStorage();
+
+    /***********************
+     * Rendering functions  *
+     ***********************/
+    function renderCurrentYear(){
+      const g = state.grades[state.currentYear];
+      document.getElementById('subject').value = g.subject || document.getElementById('subject').value;
+      document.getElementById('target').value = g.target || document.getElementById('target').value;
+
+      const tbody = document.querySelector("#assessmentTable tbody");
+      tbody.innerHTML = '';
+      g.assessments.forEach((a, idx) => {
+        const tr = renderRow(a, idx);
+        tbody.appendChild(tr);
+      });
+      updatePredictedDisplay();
+    }
+
+    function renderRow(assessment, idx){
+      const tr = document.createElement('tr');
+      tr.dataset.index = idx;
+      tr.innerHTML = `
+        <td><input class="cell-input input-type" data-idx="${idx}" value="${escapeHtml(assessment.type||'')}" placeholder="Test / Mock" onchange="rowChanged(${idx})"></td>
+        <td><input class="cell-input input-topic" data-idx="${idx}" value="${escapeHtml(assessment.topic||'')}" placeholder="Topic or notes" onchange="rowChanged(${idx})"></td>
+        <td><input class="cell-input input-score" data-idx="${idx}" type="number" min="0" max="100" value="${(assessment.score===''||assessment.score==null)?'':escapeHtml(assessment.score)}" placeholder="%" onchange="rowChanged(${idx})"></td>
+        <td><button class="icon-btn del-btn" title="Remove" onclick="removeAssessment(${idx})">✖</button></td>
+      `.trim();
+      return tr;
+    }
+
+    /***********************
+     * User interactions    *
+     ***********************/
+    function switchYear(year, btnEl){
+      saveCurrentFormToState();
+      document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+      if(btnEl) btnEl.classList.add('active');
+      state.currentYear = year;
+      renderCurrentYear();
+    }
+
+    function saveCurrentFormToState(){
+      const sub = document.getElementById('subject').value;
+      const targ = document.getElementById('target').value;
+      const rows = [...document.querySelectorAll('#assessmentTable tbody tr')];
+      const arr = rows.map(tr => {
+        const idx = tr.dataset.index;
+        const type = tr.querySelector('.input-type')?.value || '';
+        const topic= tr.querySelector('.input-topic')?.value || '';
+        const scoreRaw = tr.querySelector('.input-score')?.value;
+        const score = scoreRaw===''?null: Number(scoreRaw);
+        return { type, topic, score };
+      }).filter(r=> r.type || r.topic || r.score !== null);
+
+      state.grades[state.currentYear].subject = sub;
+      state.grades[state.currentYear].target = targ;
+      state.grades[state.currentYear].assessments = arr;
+      saveToStorage();
+    }
+
+    function addAssessment(){
+      state.grades[state.currentYear].assessments.push({type:'', topic:'', score:null});
+      renderCurrentYear();
+      setTimeout(()=> {
+        const lastIdx = state.grades[state.currentYear].assessments.length - 1;
+        const el = document.querySelector(`.input-type[data-idx="${lastIdx}"]`);
+        if(el) el.focus();
+      }, 60);
+    }
+
+    function rowChanged(idx){
+      const tr = document.querySelector(`#assessmentTable tbody tr[data-index="${idx}"]`);
+      if(!tr) return;
+      const type = tr.querySelector('.input-type').value;
+      const topic= tr.querySelector('.input-topic').value;
+      const scoreRaw = tr.querySelector('.input-score').value;
+      const score = scoreRaw === '' ? null : Number(scoreRaw);
+      state.grades[state.currentYear].assessments[idx] = { type, topic, score };
+      updatePredictedDisplay();
+    }
+
+    function removeAssessment(idx){
+      state.grades[state.currentYear].assessments.splice(idx,1);
+      renderCurrentYear();
+    }
+
+    function updatePredictedDisplay(){
+      const assessments = state.grades[state.currentYear].assessments;
+      const scores = assessments.map(a => a.score).filter(s=> typeof s === 'number' && !isNaN(s));
+      if(scores.length===0){
+        document.getElementById('predicted').innerText = "-";
+        document.getElementById('avgDisplay').innerText = "Average: —";
+        return;
+      }
+      const avg = scores.reduce((a,b)=>a+b,0)/scores.length;
+      document.getElementById('avgDisplay').innerText = `Average: ${avg.toFixed(1)}%`;
+      document.getElementById('predicted').innerText = percentToGrade(avg);
+    }
+
+    function percentToGrade(p){
+      if(p>=90) return 'A*';
+      if(p>=80) return 'A';
+      if(p>=70) return 'B';
+      if(p>=60) return 'C';
+      if(p>=50) return 'D';
+      return 'E';
+    }
+
+    /***********************
+     * Planner / results    *
+     ***********************/
+    function saveAndContinue(){
+      saveCurrentFormToState();
+      document.getElementById('mainView').style.display = 'none';
+      document.getElementById('plannerView').style.display = 'block';
+      buildPlannerView();
+    }
+
+    function buildPlannerView(){
+      const container = document.getElementById('summaryContainer');
+      container.innerHTML = '';
+      Object.keys(state.grades).forEach(yr=>{
+        const g = state.grades[yr];
+        if(!g.assessments.length) return;
+        const div = document.createElement('div');
+        div.className = 'plan-grade';
+        const avgScores = g.assessments.map(a=>a.score).filter(s=> typeof s==='number');
+        const avg = avgScores.length? (avgScores.reduce((a,b)=>a+b,0)/avgScores.length).toFixed(1) : '-';
+        div.innerHTML = `<div class="plan-header">
+          <strong>Grade ${yr} - ${g.subject} (Target: ${g.target})</strong>
+          <span>Average: ${avg}% → ${percentToGrade(avg)}</span>
+        </div>
+        <ul>${g.assessments.map(a=>`<li>${a.type || '—'}: ${a.topic || '—'} — ${a.score==null?'-':a.score}%</li>`).join('')}</ul>`;
+        container.appendChild(div);
+      });
+    }
+
+    function editPlan(){
+      document.getElementById('mainView').style.display = 'block';
+      document.getElementById('plannerView').style.display = 'none';
+      renderCurrentYear();
+    }
+
+    function clearAll(){
+      if(!confirm('Are you sure you want to clear all saved data?')) return;
+      Object.keys(state.grades).forEach(k=>{
+        state.grades[k].assessments=[];
+      });
+      saveToStorage();
+      buildPlannerView();
+      renderCurrentYear();
+    }
+
+    function downloadPlan(){
+      saveCurrentFormToState();
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state,null,2));
+      const a = document.createElement('a');
+      a.href = dataStr;
+      a.download = `gradeplan_${new Date().toISOString().split('T')[0]}.json`;
+      a.click();
+    }
+
+    function escapeHtml(str){ return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;") }
+
+    // init
+    renderCurrentYear();
+  </script>
+</body>
+</html>

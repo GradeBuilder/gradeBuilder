@@ -34,13 +34,38 @@
       top: 0;
       z-index: 1000;
     }
-    nav .logo {
-      color: #ffd700;
+
+    /* Logo with icon */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       font-weight: 700;
       font-size: 1.5rem;
+      color: #ffd700;
       text-decoration: none;
-      letter-spacing: 1.1px;
     }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, #ffd700, #f7c400);
+      border-radius: 8px;
+      box-shadow: 0 6px 18px rgba(255, 215, 0, 0.08);
+    }
+
+    .logo-mark svg {
+      width: 20px;
+      height: 20px;
+      fill: #111;
+    }
+
+    .logo-text {
+      letter-spacing: 0.6px;
+    }
+
     nav ul {
       list-style: none;
       display: flex;
@@ -84,6 +109,14 @@
       box-shadow: 0 16px 40px rgba(0,0,0,0.6);
       backdrop-filter: saturate(180%) blur(15px);
       -webkit-backdrop-filter: saturate(180%) blur(15px);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+
+    .overlay.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     h1 {
@@ -182,6 +215,18 @@
       outline: none;
     }
 
+    /* Mission & Site overview sections */
+    section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .mission {
       background-color: #ffffff;
       color: #1e2a38;
@@ -258,11 +303,17 @@
     }
 
     .site-overview .feature-box {
-      flex: 1 1 300px;
+      flex: 1 1 280px;
       background: #fff;
       border-radius: 14px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.05);
       padding: 28px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .site-overview .feature-box:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.12);
     }
 
     .site-overview .feature-box h3 {
@@ -301,7 +352,14 @@
 <body>
 
   <nav role="navigation" aria-label="Main navigation">
-    <a href="#" class="logo">Discover Your Path</a>
+    <a href="#" class="logo" title="Discover Your Path Home">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 6a1 1 0 0 1 1-1h12a3 3 0 0 1 3 3v10a1 1 0 0 1-1 1H6a3 3 0 0 1-3-3V6z"/>
+        </svg>
+      </span>
+      <span class="logo-text">Discover Your Path</span>
+    </a>
     <ul>
       <li><a href="index.html" tabindex="0">Home</a></li>
       <li><a href="career explore.html" tabindex="0">Career Explorer</a></li>
@@ -373,12 +431,33 @@
           <p>Stay ahead of scholarships that match your profile, with due dates and eligibility tips.</p>
         </div>
         <div class="feature-box">
+          <h3>📊 Grade Tracker</h3>
+          <p>Keep track of your grades across courses and visualize your academic performance over time.</p>
+        </div>
+        <div class="feature-box">
+          <h3>🏆 Extra Curricular Database</h3>
+          <p>Discover clubs, sports, volunteering opportunities, and other extracurriculars to boost your profile.</p>
+        </div>
+        <div class="feature-box">
           <h3>📬 Contact & Support</h3>
           <p>Get help or send feedback through our easy-to-use contact form or on webflare12@gmail.com.</p>
         </div>
       </div>
     </div>
   </section>
+
+  <script>
+    // Scroll animation
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {threshold: 0.1});
+
+    document.querySelectorAll('.overlay, section').forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>

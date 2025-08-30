@@ -1,295 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Input Your Information</title>
-  <style>
-    /* Background gradient with subtle gold pattern */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f6f3f1 0%, #e4dfd9 100%);
-      color: #3a2a4d;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Input Your Information</title>
+<style>
+  /* --- Base --- */
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #0d0d0d;
+    color: #f5d26b;
+    margin: 0;
+    padding: 0;
+  }
 
-    /* Add subtle textured pattern with repeating radial gradient */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: 
-        radial-gradient(circle at 20% 20%, rgba(191, 161, 75, 0.07) 2px, transparent 3px),
-        radial-gradient(circle at 80% 80%, rgba(191, 161, 75, 0.07) 2px, transparent 3px);
-      background-repeat: repeat;
-      background-size: 50px 50px;
-      pointer-events: none;
-      z-index: 0;
-    }
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 20px;
+    min-height: 100vh;
+  }
 
-    .form-container {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 60px 20px;
-      min-height: 100vh;
-    }
+  .content {
+    background: #1a1a1a;
+    padding: 40px 50px;
+    border-radius: 20px;
+    max-width: 650px;
+    width: 100%;
+    box-shadow: 0 8px 30px rgba(245, 210, 107, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 
-    .content {
-      background: #fff9e6; /* Very light creamy gold */
-      padding: 45px 50px;
-      border-radius: 28px;
-      box-shadow: 0 12px 40px rgba(191, 161, 75, 0.3);
-      max-width: 620px;
-      width: 100%;
-      border: 2px solid #bfa14b; /* Gold border */
-    }
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #f5d26b;
+  }
 
-    h1, h2, h3 {
-      color: #4a3571; /* Dark purple */
-      margin-bottom: 10px;
-      font-weight: 700;
-      text-shadow: 1px 1px 3px rgba(191, 161, 75, 0.4);
-    }
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #f5d26b;
+    margin-bottom: 0;
+    text-align: center;
+  }
 
-    p {
-      font-size: 1.05rem;
-      line-height: 1.4;
-      margin-bottom: 25px;
-      color: #5b4b7a;
-    }
+  .back-button {
+    display: inline-block;
+    margin-bottom: 20px;
+    background-color: #222;
+    color: #f5d26b;
+    padding: 10px 28px;
+    border-radius: 28px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(245, 210, 107, 0.2);
+    transition: all 0.3s ease;
+    align-self: flex-start;
+  }
 
-    label {
-      display: block;
-      margin-top: 18px;
-      font-weight: 600;
-      color: #6b5980;
-    }
+  .back-button:hover {
+    background-color: #333;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(245, 210, 107, 0.35);
+  }
 
-    input, select {
-      width: 100%;
-      padding: 12px 15px;
-      margin-top: 8px;
-      border-radius: 15px;
-      border: 2px solid #bfa14b;
-      font-size: 1rem;
-      background-color: #fff8d6;
-      color: #4a3571;
-      box-shadow: inset 0 2px 5px rgba(191, 161, 75, 0.2);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      font-weight: 600;
-    }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
 
-    input:focus, select:focus {
-      border-color: #967d33;
-      box-shadow: 0 0 8px #bfa14b;
-      outline: none;
-      background-color: #fffdd0;
-    }
+  label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #f5d26b;
+  }
 
-    .cta-button {
-      background: linear-gradient(135deg, #bfa14b, #a47d15);
-      color: #fff9d1;
-      border: none;
-      padding: 14px 35px;
-      border-radius: 35px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 30px;
-      box-shadow: 0 6px 18px rgba(191, 161, 75, 0.7);
-      transition: background 0.4s ease, transform 0.2s ease;
-      letter-spacing: 1.1px;
-      text-shadow: 0 1px 3px #6b5980;
-      display: block;
-      width: 100%;
-    }
+  select, input[type="number"] {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1.5px solid #f5d26b;
+    background: #111;
+    color: #f5d26b;
+    font-weight: 500;
+    font-size: 1rem;
+    box-shadow: inset 0 2px 5px rgba(245, 210, 107, 0.1);
+    transition: all 0.3s ease;
+  }
 
-    .cta-button:hover {
-      background: linear-gradient(135deg, #a47d15, #bfa14b);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(191, 161, 75, 0.9);
-    }
+  select:focus, input:focus {
+    outline: none;
+    border-color: #ffd700;
+    box-shadow: 0 0 8px rgba(245, 210, 107, 0.4);
+  }
 
-    .back-button {
-      display: inline-block;
-      margin-bottom: 25px;
-      background-color: #ede2a9;
-      color: #6b5980;
-      padding: 12px 28px;
-      border-radius: 28px;
-      text-decoration: none;
-      font-weight: 700;
-      box-shadow: 0 4px 12px rgba(191, 161, 75, 0.35);
-      transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-      user-select: none;
-    }
+  .course-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #111;
+    padding: 14px 18px;
+    border-radius: 16px;
+    border: 1px solid #f5d26b;
+  }
 
-    .back-button:hover {
-      background-color: #d6c469;
-      color: #4a3571;
-      transform: translateY(-2px);
-      box-shadow: 0 7px 20px rgba(191, 161, 75, 0.65);
-    }
+  .cta-button {
+    background: linear-gradient(135deg, #f5d26b, #d4a600);
+    color: #111;
+    border: none;
+    padding: 14px 35px;
+    border-radius: 28px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(245, 210, 107, 0.4);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+  }
 
-    #results {
-      margin-top: 35px;
-      background-color: #fff9e6;
-      padding: 25px 30px;
-      border-radius: 18px;
-      color: #4a3571;
-      box-shadow: 0 8px 30px rgba(191, 161, 75, 0.25);
-      border: 1.5px solid #bfa14b;
-    }
+  .cta-button:hover {
+    background: linear-gradient(135deg, #d4a600, #f5d26b);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(245, 210, 107, 0.6);
+  }
 
-    #results ul {
-      padding-left: 22px;
-      margin-top: 10px;
-      font-weight: 600;
-    }
+  #results {
+    margin-top: 25px;
+    background-color: #111;
+    padding: 25px 28px;
+    border-radius: 16px;
+    color: #f5d26b;
+    box-shadow: 0 5px 20px rgba(245, 210, 107, 0.2);
+    border: 1px solid #f5d26b;
+  }
 
-    #results li {
-      margin-bottom: 8px;
-    }
-  </style>
+  #results h2, #results h3 {
+    margin-bottom: 8px;
+    color: #f5d26b;
+  }
+
+  #results ul {
+    padding-left: 20px;
+  }
+
+  #results li {
+    margin-bottom: 6px;
+  }
+
+  @media(max-width:768px){
+    .content { padding: 30px 25px; }
+    h1 { font-size: 1.6rem; }
+  }
+</style>
 </head>
 <body>
-  <div class="form-container">
-    <div class="content">
-      <h1>Input Your Information</h1>
-      <p>Please select your area of interest and input your courses along with grades.</p>
 
-      <a href="pagePicker.html" class="back-button">← Back</a>
+<div class="form-container">
+  <div class="content">
+    <h1>Input Your Information</h1>
+    <p>Select your area of interest and input your courses with grades.</p>
 
-      <form id="courseForm" onsubmit="return false;">
-        <label for="interest">Select your area of interest:</label>
-        <select id="interest">
-          <option value="Technology & Engineering">Technology & Engineering</option>
-          <option value="Business & Finance">Business & Finance</option>
-          <option value="Health & Medicine">Health & Medicine</option>
-          <option value="Social Sciences">Social Sciences</option>
-          <option value="Arts & Humanities">Arts & Humanities</option>
-        </select>
+    <a href="pagePicker.html" class="back-button">← Back</a>
 
-        <div id="courseInputs"></div>
+    <form id="courseForm" onsubmit="return false;">
+      <label for="interest">Select your area of interest:</label>
+      <select id="interest">
+        <option value="Technology & Engineering">Technology & Engineering</option>
+        <option value="Business & Finance">Business & Finance</option>
+        <option value="Health & Medicine">Health & Medicine</option>
+        <option value="Social Sciences">Social Sciences</option>
+        <option value="Arts & Humanities">Arts & Humanities</option>
+      </select>
 
-        <button type="button" id="submitButton" class="cta-button">Submit</button>
-      </form>
+      <div id="courseInputs"></div>
 
-      <div id="results"></div>
-    </div>
+      <button type="button" id="submitButton" class="cta-button">Submit</button>
+    </form>
+
+    <div id="results"></div>
   </div>
+</div>
 
-  <script>
-    const courseCodes = [
-      "ENG4U", "ETS4U", "EWC4U", "MHF4U", "MCV4U", "MDM4U", "SCH4U", "SBI4U", "SPH4U", "SES4U", "SNC4M",
-      "ICS4U", "TEJ4M", "TGJ4M", "BAT4M", "BOH4M", "BBB4M", "CIA4U", "IDC4U", "HHG4M", "HHS4U", "HZT4U",
-      "CLN4U", "CPW4U", "CGW4U", "AVI4M", "ADA4M", "ASM4M", "AMU4M", "HFA4U", "HPC3O", "TCJ4C", "CHY4U",
-      "LVV4U", "NDW4M", "IDC4O", "IDC3O"
-    ];
+<script>
+const courseCodes = ["ENG4U","ETS4U","EWC4U","MHF4U","MCV4U","MDM4U","SCH4U","SBI4U","SPH4U","SES4U","SNC4M",
+"ICS4U","TEJ4M","TGJ4M","BAT4M","BOH4M","BBB4M","CIA4U","IDC4U","HHG4M","HHS4U","HZT4U",
+"CLN4U","CPW4U","CGW4U","AVI4M","ADA4M","ASM4M","AMU4M","HFA4U","HPC3O","TCJ4C","CHY4U",
+"LVV4U","NDW4M","IDC4O","IDC3O"];
 
-    const courseInputsDiv = document.getElementById("courseInputs");
+const courseInputsDiv = document.getElementById("courseInputs");
+for(let i=1;i<=6;i++){
+  const container = document.createElement("div");
+  container.classList.add("course-container");
 
-    for (let i = 1; i <= 6; i++) {
-      const container = document.createElement("div");
-      const label = document.createElement("label");
-      label.htmlFor = `course${i}`;
-      label.textContent = `Course ${i} (with Grade):`;
-      const select = document.createElement("select");
-      select.id = `course${i}`;
-      select.innerHTML = `
-        <option value="">-- Select Course Code --</option>
-        ${courseCodes.map(code => `<option value="${code}">${code}</option>`).join('')}
-      `;
-      const gradeInput = document.createElement("input");
-      gradeInput.type = "number";
-      gradeInput.id = `grade${i}`;
-      gradeInput.placeholder = "Enter grade";
-      gradeInput.min = 0;
-      gradeInput.max = 100;
-      container.appendChild(label);
-      container.appendChild(select);
-      container.appendChild(gradeInput);
-      courseInputsDiv.appendChild(container);
-    }
+  const label = document.createElement("label");
+  label.htmlFor=`course${i}`;
+  label.textContent=`Course ${i} (with Grade):`;
 
-    const programSuggestions = {
-      "Technology & Engineering": [
-        { name: "Computer Science", minGrade: 85, universities: ["University of Waterloo", "University of Toronto", "McMaster University"] },
-        { name: "Software Engineering", minGrade: 88, universities: ["University of Waterloo", "Western University"] },
-        { name: "Electrical Engineering", minGrade: 82, universities: ["University of Ottawa", "Queen's University"] },
-        { name: "Information Technology", minGrade: 75, universities: ["York University", "Toronto Metropolitan University"] }
-      ],
-      "Business & Finance": [
-        { name: "Business Administration", minGrade: 80, universities: ["Wilfrid Laurier University", "Schulich School of Business"] },
-        { name: "Accounting", minGrade: 78, universities: ["Brock University", "McMaster University"] },
-        { name: "Marketing", minGrade: 75, universities: ["Toronto Metropolitan University", "York University"] },
-        { name: "Economics", minGrade: 83, universities: ["University of Toronto", "Western University"] }
-      ],
-      "Health & Medicine": [
-        { name: "Nursing", minGrade: 82, universities: ["University of Toronto", "McMaster University"] },
-        { name: "Biomedical Sciences", minGrade: 88, universities: ["York University", "Western University"] },
-        { name: "Health Sciences", minGrade: 80, universities: ["Carleton University", "Queen's University"] },
-        { name: "Kinesiology", minGrade: 78, universities: ["University of Guelph", "Laurentian University"] }
-      ],
-      "Social Sciences": [
-        { name: "Psychology", minGrade: 78, universities: ["University of Ottawa", "York University"] },
-        { name: "Sociology", minGrade: 75, universities: ["Carleton University", "University of Windsor"] },
-        { name: "Political Science", minGrade: 80, universities: ["University of Toronto", "McMaster University"] },
-        { name: "Criminology", minGrade: 76, universities: ["Toronto Metropolitan University", "Brock University"] }
-      ],
-      "Arts & Humanities": [
-        { name: "English Literature", minGrade: 75, universities: ["University of Guelph", "Queen's University"] },
-        { name: "History", minGrade: 73, universities: ["York University", "University of Ottawa"] },
-        { name: "Philosophy", minGrade: 72, universities: ["University of Toronto", "Western University"] },
-        { name: "Fine Arts", minGrade: 70, universities: ["OCAD University", "University of Windsor"] }
-      ]
-    };
+  const select = document.createElement("select");
+  select.id=`course${i}`;
+  select.innerHTML=`<option value="">-- Select Course Code --</option>${courseCodes.map(c=>`<option value="${c}">${c}</option>`).join('')}`;
 
-    document.getElementById("submitButton").addEventListener("click", function () {
-      const interest = document.getElementById("interest").value;
-      const courses = [];
-      const grades = [];
+  const gradeInput = document.createElement("input");
+  gradeInput.type="number";
+  gradeInput.id=`grade${i}`;
+  gradeInput.placeholder="Enter grade";
+  gradeInput.min=0;
+  gradeInput.max=100;
 
-      for (let i = 1; i <= 6; i++) {
-        const course = document.getElementById(`course${i}`).value.trim();
-        const grade = document.getElementById(`grade${i}`).value.trim();
-        if (course && grade) {
-          courses.push(course);
-          grades.push(Number(grade));
-        }
-      }
+  container.appendChild(label);
+  container.appendChild(select);
+  container.appendChild(gradeInput);
+  courseInputsDiv.appendChild(container);
+}
 
-      const resultDiv = document.getElementById("results");
+const programSuggestions = {
+  "Technology & Engineering":[{name:"Computer Science",minGrade:85,universities:["University of Waterloo","University of Toronto","McMaster University"]},{name:"Software Engineering",minGrade:88,universities:["University of Waterloo","Western University"]},{name:"Electrical Engineering",minGrade:82,universities:["University of Ottawa","Queen's University"]},{name:"Information Technology",minGrade:75,universities:["York University","Toronto Metropolitan University"]}],
+  "Business & Finance":[{name:"Business Administration",minGrade:80,universities:["Wilfrid Laurier University","Schulich School of Business"]},{name:"Accounting",minGrade:78,universities:["Brock University","McMaster University"]},{name:"Marketing",minGrade:75,universities:["Toronto Metropolitan University","York University"]},{name:"Economics",minGrade:83,universities:["University of Toronto","Western University"]}],
+  "Health & Medicine":[{name:"Nursing",minGrade:82,universities:["University of Toronto","McMaster University"]},{name:"Biomedical Sciences",minGrade:88,universities:["York University","Western University"]},{name:"Health Sciences",minGrade:80,universities:["Carleton University","Queen's University"]},{name:"Kinesiology",minGrade:78,universities:["University of Guelph","Laurentian University"]}],
+  "Social Sciences":[{name:"Psychology",minGrade:78,universities:["University of Ottawa","York University"]},{name:"Sociology",minGrade:75,universities:["Carleton University","University of Windsor"]},{name:"Political Science",minGrade:80,universities:["University of Toronto","McMaster University"]},{name:"Criminology",minGrade:76,universities:["Toronto Metropolitan University","Brock University"]}],
+  "Arts & Humanities":[{name:"English Literature",minGrade:75,universities:["University of Guelph","Queen's University"]},{name:"History",minGrade:73,universities:["York University","University of Ottawa"]},{name:"Philosophy",minGrade:72,universities:["University of Toronto","Western University"]},{name:"Fine Arts",minGrade:70,universities:["OCAD University","University of Windsor"]}]
+};
 
-      if (grades.length === 0) {
-        resultDiv.innerHTML = "<p><b>Please fill in at least one course and grade.</b></p>";
-        return;
-      }
+document.getElementById("submitButton").addEventListener("click",function(){
+  const interest = document.getElementById("interest").value;
+  const courses = [];
+  const grades = [];
+  for(let i=1;i<=6;i++){
+    const course=document.getElementById(`course${i}`).value.trim();
+    const grade=document.getElementById(`grade${i}`).value.trim();
+    if(course && grade){ courses.push(course); grades.push(Number(grade)); }
+  }
+  const resultDiv=document.getElementById("results");
+  if(grades.length===0){ resultDiv.innerHTML="<p><b>Please fill in at least one course and grade.</b></p>"; return; }
+  const avg=grades.reduce((a,b)=>a+b,0)/grades.length;
+  const roundedAvg=Math.round(avg);
+  const eligible=programSuggestions[interest].filter(p=>roundedAvg>=p.minGrade);
+  resultDiv.innerHTML=`
+    <h2>Your Information:</h2>
+    <p><b>Interest:</b> ${interest}</p>
+    <p><b>Courses & Grades:</b></p>
+    <ul>${courses.map((c,i)=>`<li>${c}: ${grades[i]}</li>`).join('')}</ul>
+    <p><b>Average Grade:</b> ${roundedAvg}%</p>
+    <h3>Eligible Programs:</h3>
+    ${eligible.length>0?`<ul>${eligible.map(p=>`<li>${p.name} — ${p.universities.join(', ')}</li>`).join('')}</ul>`:'<p>No matching programs. Improve grades or change interest.</p>'}
+  `;
+});
+</script>
 
-      const average = grades.reduce((a, b) => a + b, 0) / grades.length;
-      const roundedAvg = Math.round(average);
-      const eligiblePrograms = (programSuggestions[interest] || []).filter(p => roundedAvg >= p.minGrade);
-
-      resultDiv.innerHTML = `
-        <h2>Your Information:</h2>
-        <p><b>Interest:</b> ${interest}</p>
-        <p><b>Courses and Grades:</b></p>
-        <ul>
-          ${courses.map((c, i) => `<li>${c}: ${grades[i]}</li>`).join('')}
-        </ul>
-        <p><b>Average Grade:</b> ${roundedAvg}%</p>
-        <h3>Eligible Programs and Universities:</h3>
-        ${
-          eligiblePrograms.length > 0
-            ? `<ul>${eligiblePrograms.map(p => `<li>${p.name} — ${p.universities.join(', ')}</li>`).join('')}</ul>`
-            : "<p>No programs matched your current grade. Try improving your average or exploring other interests.</p>"
-        }
-      `;
-    });
-  </script>
 </body>
 </html>

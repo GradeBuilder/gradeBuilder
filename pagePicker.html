@@ -6,196 +6,147 @@
   <title>Select Your Path</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* Reset */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #121212;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
       color: #f5f1e9;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      align-items: center;
     }
 
-    /* Updated Nav Styles */
     nav {
-      background: #1e2a38;
+      width: 100%;
+      background: #111;
       padding: 16px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      border-bottom: 1px solid #333;
       position: sticky;
       top: 0;
       z-index: 1000;
     }
+
     nav .logo {
       color: #ffd700;
       font-weight: 700;
       font-size: 1.5rem;
       text-decoration: none;
-      letter-spacing: 1.1px;
     }
+
     nav ul {
       list-style: none;
       display: flex;
-      gap: 28px;
+      gap: 24px;
     }
+
     nav ul li a {
-      color: #fff;
+      color: #f5f1e9;
       font-weight: 600;
       text-decoration: none;
       font-size: 1rem;
-      padding: 6px 8px;
-      border-radius: 6px;
-      transition: background 0.3s ease;
+      transition: color 0.3s ease;
     }
-    nav ul li a:hover,
-    nav ul li a:focus {
-      background: #ffd700;
-      color: #1e2a38;
-      outline: none;
+    nav ul li a:hover {
+      color: #ffd700;
     }
 
     .container {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 60px 20px;
-    }
-
-    .content-box {
       max-width: 900px;
       width: 100%;
       text-align: center;
-      padding: 50px 40px;
-      background: #1c1c1c;
-      border-radius: 18px;
-      border: 2px solid #ffd700;
+      margin-top: 60px;
+      padding: 20px;
     }
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      color: #ffd700;
-      font-weight: 900;
-      letter-spacing: 2px;
-    }
-
-    p {
-      font-size: 1.3rem;
-      margin-bottom: 40px;
-      color: #e5d8b0;
-      font-weight: 500;
-    }
-
-    .path-options {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-
-    .path-option,
-    .career-options {
-      background-color: #222222;
-      padding: 30px 35px;
-      border-radius: 16px;
-      width: 280px;
-      text-align: center;
-      border: 1.5px solid transparent;
-      transition: transform 0.3s ease;
-    }
-
-    .path-option:hover,
-    .career-options:hover {
-      transform: scale(1.06);
-      border-color: #ffd700;
-      background-color: #2a2a2a;
-    }
-
-    .path-option h2,
-    .career-options h2 {
-      font-size: 1.9rem;
-      margin-bottom: 18px;
-      color: #ffd700;
+      font-size: 2.8rem;
       font-weight: 800;
+      margin-bottom: 12px;
+      color: #ffd700;
+      letter-spacing: 1px;
     }
 
-    .path-option p,
-    .career-options p {
-      font-size: 1.15rem;
-      margin-bottom: 28px;
-      color: #f0e6c8;
-      font-weight: 400;
+    p.subtitle {
+      font-size: 1.2rem;
+      color: #d4c77c;
+      margin-bottom: 40px;
     }
 
-    .path-option a,
-    .career-options a {
-      display: inline-block;
-      padding: 14px 32px;
-      background-color: #ffd700;
-      color: #1c1c1c;
-      border-radius: 30px;
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 26px;
+      border-radius: 14px;
+      background: #1c1c1c;
+      border: 1px solid #333;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+      text-align: left;
+    }
+
+    .option:hover {
+      transform: translateY(-3px);
+      border: 1px solid #ffd700;
+      box-shadow: 0 6px 18px rgba(255, 215, 0, 0.2);
+    }
+
+    .option h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #ffd700;
+      margin-bottom: 4px;
+    }
+
+    .option p {
+      font-size: 1rem;
+      color: #e6e0c9;
+    }
+
+    .option a {
       text-decoration: none;
       font-weight: 700;
-      font-size: 1.05rem;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      color: #ffd700;
+      font-size: 1.2rem;
+      transition: color 0.2s;
     }
 
-    .path-option a:hover,
-    .career-options a:hover {
-      background-color: #ffea64;
-      transform: scale(1.08);
+    .option a:hover {
+      color: #ffea64;
     }
 
     .back-button {
       display: inline-block;
-      margin-top: 45px;
+      margin-top: 40px;
+      padding: 12px 28px;
       background-color: #ffd700;
-      color: #1c1c1c;
-      padding: 16px 38px;
+      color: #111;
       border-radius: 30px;
-      font-weight: 800;
-      font-size: 1.15rem;
+      font-weight: 700;
+      font-size: 1rem;
       text-decoration: none;
-      transition: background-color 0.3s ease;
-      user-select: none;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     .back-button:hover {
       background-color: #ffea64;
-    }
-
-    @media (max-width: 720px) {
-      nav ul {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .path-options {
-        flex-direction: column;
-        gap: 30px;
-      }
-
-      .path-option,
-      .career-options {
-        width: 100%;
-      }
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
 
   <!-- NAV BAR -->
-  <nav role="navigation" aria-label="Main navigation">
-    <a href="index.html" class="logo">Discover Your Path</a>
+  <nav>
+    <a href="index.html" class="logo">gradeBuilder</a>
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="career explore.html">Career Explorer</a></li>
@@ -207,41 +158,61 @@
 
   <!-- MAIN CONTENT -->
   <div class="container">
-    <div class="content-box">
-      <h1>Select Your Path</h1>
-      <p>Choose what you'd like to do next to get started on your university journey:</p>
+    <h1>Select Your Path</h1>
+    <p class="subtitle">Choose what you'd like to do next to get started on your university journey:</p>
 
-      <div class="path-options">
-        <div class="path-option">
+    <div class="options">
+      <div class="option">
+        <div>
           <h2>Fill Out Form</h2>
           <p>Provide your courses and grades for personalized program suggestions.</p>
-          <a href="form.html">Go to Form</a>
         </div>
+        <a href="form.html">→</a>
+      </div>
 
-        <div class="path-option">
+      <div class="option">
+        <div>
           <h2>University Application Process</h2>
           <p>Learn more about the application process and what you need to know.</p>
-          <a href="university-application-guide.html">Learn More</a>
         </div>
+        <a href="university-application-guide.html">→</a>
       </div>
 
-      <div class="path-options" style="margin-top: 50px;">
-        <div class="career-options">
+      <div class="option">
+        <div>
           <h2>Explore Your Career</h2>
           <p>Learn more about the career you want.</p>
-          <a href="career explore.html">Learn More</a>
         </div>
-
-        <div class="career-options">
-          <h2>Keep Track of Deadlines</h2>
-          <p>Learn more about new opportunities and never miss an application.</p>
-          <a href="Calendar.html">Learn More</a>
-        </div>
+        <a href="careerExplore.html">→</a>
       </div>
 
-      <a href="index.html" class="back-button">← Back to Home</a>
-    </div>
-  </div>
+      <div class="option">
+        <div>
+          <h2>Keep Track of Deadlines</h2>
+          <p>Stay organized and never miss an application opportunity.</p>
+        </div>
+        <a href="Calendar.html">→</a>
+      </div>
 
+      <!-- NEW FEATURES -->
+      <div class="option">
+        <div>
+          <h2>Extra Curricular Database</h2>
+          <p>Discover opportunities to stand out in your personal statement.</p>
+        </div>
+        <a href="extraCurricular.html">→</a>
+      </div>
+
+      <div class="option">
+        <div>
+          <h2>Grade Tracker</h2>
+          <p>Track your assessment scores and view predicted grades.</p>
+        </div>
+        <a href="gradeTracker.html">→</a>
+      </div>
+    </div>
+
+    <a href="index.html" class="back-button">← Back to Home</a>
+  </div>
 </body>
 </html>

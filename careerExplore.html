@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Career Explorer - Discover Your Path</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Poppins', sans-serif; background:#0d0d0d; color:#f5d26b; min-height:100vh; }
+
+  /* NAV BAR */
+  nav {
+    background:#1a1a1a; padding:16px 40px;
+    display:flex; justify-content:space-between; align-items:center;
+    position:sticky; top:0; z-index:1000;
+    box-shadow:0 4px 12px rgba(245,210,107,0.2);
+  }
+  nav .logo { color:#f5d26b; font-weight:700; font-size:1.5rem; text-decoration:none; letter-spacing:1px; }
+  nav ul { list-style:none; display:flex; gap:24px; }
+  nav ul li a { color:#f5d26b; text-decoration:none; font-weight:600; padding:6px 8px; border-radius:6px; transition:all 0.3s ease; }
+  nav ul li a:hover { background:#f5d26b; color:#1a1a1a; }
+
+  /* MAIN CONTAINER */
+  .container {
+    max-width:700px;
+    background:#1a1a1a;
+    border-radius:16px;
+    padding:40px 50px;
+    margin:80px auto;
+    box-shadow:0 12px 30px rgba(245,210,107,0.2);
+    text-align:center;
+  }
+
+  h1 { font-size:2.5rem; font-weight:700; margin-bottom:10px; color:#f5d26b; }
+  p.tagline { color:#f5d26b; font-size:1.05rem; margin-bottom:30px; }
+
+  form { text-align:left; display:flex; flex-direction:column; gap:16px; }
+  label { font-weight:600; margin-bottom:6px; display:block; color:#f5d26b; }
+  input[type="text"] {
+    width:100%; padding:12px 15px; border-radius:12px; border:1.5px solid #f5d26b;
+    background:#111; color:#f5d26b; font-weight:500; transition:all 0.3s ease;
+  }
+  input[type="text"]:focus { outline:none; border-color:#ffd700; box-shadow:0 0 6px rgba(245,210,107,0.5); }
+
+  button {
+    margin-top:15px; width:100%;
+    background:linear-gradient(135deg,#f5d26b,#d4a600);
+    color:#111; border:none; padding:14px; font-size:1.15rem; font-weight:700;
+    border-radius:28px; cursor:pointer; box-shadow:0 6px 18px rgba(245,210,107,0.4); transition:all 0.3s ease;
+  }
+  button:hover { background:linear-gradient(135deg,#d4a600,#f5d26b); transform:translateY(-2px); }
+
+  .result {
+    background:#111; padding:25px; border-radius:16px; margin-top:25px;
+    box-shadow:0 5px 20px rgba(245,210,107,0.2); display:none; text-align:left;
+  }
+  .result h2 { color:#f5d26b; margin-bottom:12px; }
+  .result ul { list-style:none; padding-left:0; }
+  .result ul li { margin-bottom:10px; padding-left:20px; position:relative; }
+  .result ul li::before { content:"•"; position:absolute; left:0; color:#f5d26b; font-weight:900; }
+
+  .back-button {
+    display:inline-block; margin-top:25px; background:#f5d26b; color:#111; padding:12px 30px;
+    border-radius:28px; font-weight:700; text-decoration:none; box-shadow:0 6px 18px rgba(245,210,107,0.3); transition:all 0.3s ease;
+  }
+  .back-button:hover { background:#d4a600; transform:scale(1.05); }
+
+  @media(max-width:600px){
+    .container { padding:30px 20px; margin:50px 10px; }
+    h1 { font-size:2rem; }
+    button { font-size:1rem; padding:12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="intro.html" class="logo">gradeBuilder</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="career explore.html">Career Explorer</a></li>
+    <li><a href="pagePicker.html">Get Started</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="highSchoolPlan.html">Planner</a></li>
+  </ul>
+</nav>
+
+<!-- MAIN -->
+<div class="container">
+  <h1>Career Explorer</h1>
+  <p class="tagline">Enter your field of interest and optionally a specific job to discover matching careers, salary ranges, and growth outlooks.</p>
+
+  <form id="careerForm">
+    <label for="field">Field of Interest <span style="color:#e53935;">*</span></label>
+    <input type="text" id="field" name="field" placeholder="e.g., Engineering, Health, Arts" required>
+    <label for="job">Specific Job (optional)</label>
+    <input type="text" id="job" name="job" placeholder="e.g., Mechanical Engineer, Nurse">
+    <button type="submit">Explore Careers</button>
+  </form>
+
+  <div class="result" id="result"></div>
+  <a href="pagePicker.html" class="back-button">← Back to Form</a>
+</div>
+
+<script>
+  const mockCareers = {
+    Engineering: [
+      { job:"Mechanical Engineer", salary:"$70,000–$95,000", growth:"8% growth over 10 years" },
+      { job:"Electrical Engineer", salary:"$75,000–$100,000", growth:"7% growth over 10 years" },
+      { job:"Civil Engineer", salary:"$65,000–$90,000", growth:"6% growth over 10 years" }
+    ],
+    Health: [
+      { job:"Nurse", salary:"$60,000–$85,000", growth:"9% growth over 10 years" },
+      { job:"Physician", salary:"$120,000–$200,000", growth:"5% growth over 10 years" },
+      { job:"Pharmacist", salary:"$100,000–$130,000", growth:"4% growth over 10 years" }
+    ],
+    Arts: [
+      { job:"Graphic Designer", salary:"$45,000–$65,000", growth:"3% growth over 10 years" },
+      { job:"Musician", salary:"$30,000–$60,000", growth:"2% growth over 10 years" },
+      { job:"Writer", salary:"$40,000–$70,000", growth:"3% growth over 10 years" }
+    ]
+  };
+
+  document.getElementById("careerForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    const field = document.getElementById("field").value.trim();
+    const job = document.getElementById("job").value.trim();
+    const resultDiv = document.getElementById("result");
+
+    let results = [];
+
+    for (let key in mockCareers) {
+      if (key.toLowerCase() === field.toLowerCase()) {
+        results = mockCareers[key].filter(c => !job || c.job.toLowerCase().includes(job.toLowerCase()));
+        break;
+      }
+    }
+
+    if (results.length === 0) {
+      resultDiv.innerHTML = `<h2>No careers found</h2><p>Try a different field or job title.</p>`;
+    } else {
+      resultDiv.innerHTML = `<h2>Matching Careers:</h2><ul>${results.map(c=>`<li><b>${c.job}</b> — Salary: ${c.salary}, Outlook: ${c.growth}</li>`).join('')}</ul>`;
+    }
+
+    resultDiv.style.display = "block";
+  });
+</script>
+
+</body>
+</html>
